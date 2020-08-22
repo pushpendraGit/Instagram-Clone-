@@ -83,8 +83,7 @@ function App() {
   }, [user, username]);
 
   useEffect(() => {
-    db.collection("Posts")
-    .onSnapshot((snapshot) => {
+    db.collection("Posts").onSnapshot((snapshot) => {
       console.log(snapshot.docs.doc);
       setPosts(snapshot.docs.map((doc) => ({ id: doc.id, post: doc.data() })));
     });
@@ -115,12 +114,6 @@ function App() {
   };
   return (
     <div className="app">
-      {user?.displayName ? (
-        <ImageUpload username={user.displayName} />
-      ) : (
-        <h3>Sorry 😛 You need to Log-in</h3>
-      )}
-
       <Modal open={open} onClose={() => setOpen(false)}>
         <div style={modalStyle} className={classes.paper}>
           <form className="app__signup">
@@ -193,15 +186,20 @@ function App() {
           className="app__headerImage"
           src="https://pngimage.net/wp-content/uploads/2018/06/font-instagram-png-2.png"
         />
+
+        {/* for sin out btn */}
+
+        {user ? (
+          <Button onClick={() => auth.signOut()}>Log Out</Button>
+        ) : (
+          <div className="app__loginContainer">
+            <Button onClick={() => setOpenSignin(true)}>Sign In</Button>
+            <Button onClick={() => setOpen(true)}>Sign UP</Button>
+          </div>
+        )}
       </div>
-      {user ? (
-        <Button onClick={() => auth.signOut()}>Log Out</Button>
-      ) : (
-        <div className="app__loginContainer">
-          <Button onClick={() => setOpenSignin(true)}>Sign In</Button>
-          <Button onClick={() => setOpen(true)}>Sign UP</Button>
-        </div>
-      )}
+
+      <div className="app__posts">
 
       {posts.map(({ id, post }) => (
         <Post
@@ -211,6 +209,15 @@ function App() {
           imageUrl={post.imageUrl}
         />
       ))}
+
+      </div>
+
+     
+      {user?.displayName ? (
+        <ImageUpload username={user.displayName} />
+      ) : (
+        <h3>Sorry 😛 You need to Log-in</h3>
+      )}
     </div>
   );
 }

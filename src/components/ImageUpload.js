@@ -54,8 +54,8 @@ function Imageupload({ username }) {
   };
 
   return (
-    <div>
-      <progress value={progress} max="100" />
+    <div className="imageupload">
+      <progress className="imageupload__progress" value={progress} max="100" />
       <input
         placeholder="Enter a cpation"
         type="text"
