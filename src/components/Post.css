@@ -1,13 +1,11 @@
-.post{
+.post {
+  background-color: white;
+  border: 1px solid lightgray;
 
-    background-color: white;
-    border: 1px solid lightgray;
-
-    max-width: 500px;
-    margin-bottom: 45px;
+  max-width: 500px;
+  margin-bottom: 45px;
 }
 .post__image {
-
   width: 100%;
 
   border-top: 1px solid lightgray;
@@ -30,4 +28,29 @@
 
 .post_avatar {
   margin-right: 10px;
+}
+
+.post__comments{
+
+  padding: 20px;
+}
+
+.post__commentBox {
+  display: flex;
+  margin-top: 10px;
+}
+
+.post__input {
+  border: none;
+  padding: 10px;
+  border-top: 1px solid lightgray;
+  flex: 1;
+}
+
+.post__button {
+  flex: 0;
+  border: none;
+  color: #6082a3;
+  background-color: transparent;
+  border-top: 1px solid lightgray;
 }

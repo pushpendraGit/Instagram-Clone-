@@ -4,10 +4,12 @@
 
 .app {
   background-color: #fafafa;
- 
 }
 
 .app__header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   background-color: white;
   padding: 20px;
   object-fit: contain;
@@ -24,13 +26,23 @@
   object-fit: contain;
 }
 
-.app__signup{
-
+.app__signup {
   display: flex;
   flex-direction: column;
 }
 
-.app__posts{
-
+.app__posts {
   padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.app__postsRight {
+  margin-left: 20px;
+}
+
+@media only screen and (max-width: 650px) {
+  .app__postsRight {
+    display: none;
+  }
 }

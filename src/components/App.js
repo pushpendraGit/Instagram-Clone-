@@ -7,6 +7,7 @@ import Post from "./Post";
 import { db, auth } from "./firebase";
 import { Button, Input } from "@material-ui/core";
 import ImageUpload from "./ImageUpload";
+import InstagramEmbed from "react-instagram-embed";
 function rand() {
   return Math.round(Math.random() * 20) - 10;
 }
@@ -83,8 +84,8 @@ function App() {
   }, [user, username]);
 
   useEffect(() => {
-    db.collection("Posts").onSnapshot((snapshot) => {
-      console.log(snapshot.docs.doc);
+    db.collection("Posts")
+    .onSnapshot((snapshot) => {
       setPosts(snapshot.docs.map((doc) => ({ id: doc.id, post: doc.data() })));
     });
   }, []);
@@ -200,19 +201,34 @@ function App() {
       </div>
 
       <div className="app__posts">
-
-      {posts.map(({ id, post }) => (
-        <Post
-          key={id}
-          username={post.username}
-          caption={post.caption}
-          imageUrl={post.imageUrl}
-        />
-      ))}
-
+        <div className="app__postsLeft">
+          {posts.map(({ id, post }) => (
+            <Post
+              key={id}
+              postId={id}
+              username={post.username}
+              user={user}
+              caption={post.caption}
+              imageUrl={post.imageUrl}
+            />
+          ))}
+        </div>
+        <div className="app__postsRight">
+          <InstagramEmbed
+            url="https://www.instagram.com/p/B_kXN7zlJ00/"
+            maxWidth={320}
+            hideCaption={false}
+            containerTagName="div"
+            protocol=""
+            injectScript
+            onLoading={() => {}}
+            onSuccess={() => {}}
+            onAfterRender={() => {}}
+            onFailure={() => {}}
+          />
+        </div>
       </div>
 
-     
       {user?.displayName ? (
         <ImageUpload username={user.displayName} />
       ) : (
